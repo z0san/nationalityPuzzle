@@ -1,31 +1,29 @@
 
 sealed trait ConditionType {
-	def positionsToCheck(position: Position): Option[List[Position]]
+	def positionsToCheck(position: Position): List[Position]
 }
 
 object ConditionType {
 	case object SameHouseAs extends ConditionType {
-		def positionsToCheck(position: Position) = Some(List(position))
+		def positionsToCheck(position: Position) = List(position)
 	}
 
 	case object LeftOf extends ConditionType {
 		def positionsToCheck(position: Position) =
-			position.left.map(List(_))
+			position.right.toList
 	}
 	case object RightOf extends ConditionType {
 		def positionsToCheck(position: Position) =
-			position.right.map(List(_))
+			position.left.toList
 	}
 	case object NextTo extends ConditionType {
 		def positionsToCheck(position: Position) =
-			(position.right, position.left) match {
-				case (Some(l), Some(r)) => Some(List(l, r))
-				case _ => None
-			}
+			position.left.toList ++ position.right.toList
 	}
 }
 
 class Condition(
+	val name: String,
 	val subTrait: Trait,
 	val sub: Checkable,
 	val conditionType: ConditionType,

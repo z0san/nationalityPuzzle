@@ -16,13 +16,20 @@ sealed trait Position extends Checkable {
   def left: Option[Position]
 }
 object Position {
+  def allPossible = Seq(
+    FarLeft,
+    Left,
+    Middle,
+    Right,
+    FarRight
+  )
   case object FarLeft extends Position {
     def right = Some(Left)
     def left = None
   }
   case object Left extends Position {
     def right = Some(Middle)
-    def left = Some(Left)
+    def left = Some(FarLeft)
   }
   case object Middle extends Position {
     def right = Some(Right)
@@ -40,6 +47,14 @@ object Position {
 
 sealed trait HouseColor extends Checkable
 object HouseColor {
+  def allPossible = List(
+    Yellow,
+    Blue,
+    Red,
+    Ivory,
+    Green
+  )
+
   case object Yellow extends HouseColor
   case object Blue extends HouseColor
   case object Red extends HouseColor
@@ -49,6 +64,14 @@ object HouseColor {
 
 sealed trait Nationality extends Checkable
 object Nationality {
+  def allPossible = Seq(
+    Norwegian,
+    Ukrainian,
+    English,
+    Spanish,
+    Japanese
+  )
+
   case object Norwegian extends Nationality
   case object Ukrainian extends Nationality
   case object English extends Nationality
@@ -58,6 +81,14 @@ object Nationality {
 
 sealed trait Pet extends Checkable
 object Pet {
+  def allPossible = Seq(
+    Fox,
+    Horse,
+    Snail,
+    Dog,
+    Zebra
+  )
+
   case object Fox extends Pet
   case object Horse extends Pet
   case object Snail extends Pet
@@ -67,6 +98,14 @@ object Pet {
 
 sealed trait Drink extends Checkable
 object Drink {
+  def allPossible = Seq(
+    Water,
+    Tea,
+    Milk,
+    OrangeJuice,
+    Coffee
+  )
+
   case object Water extends Drink
   case object Tea extends Drink
   case object Milk extends Drink
@@ -76,6 +115,14 @@ object Drink {
 
 sealed trait Cigarettes extends Checkable
 object Cigarettes {
+  def allPossible = Seq(
+    Kools,
+    Chesterfileds,
+    OldGold,
+    LuckyStrike,
+    Parliaments
+  )
+
   case object Kools extends Cigarettes
   case object Chesterfileds extends Cigarettes
   case object OldGold extends Cigarettes
